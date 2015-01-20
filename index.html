@@ -13,6 +13,8 @@
 	<script src="libraries/howler.min.js" type="text/javascript"></script> <!-- Audio, http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library -->
 	<script src="libraries/jquery.hotkeys.js" type="text/javascript"></script> <!-- Keyboard mapping, https://github.com/tzuryby/jquery.hotkeys -->
 	<script src="libraries/sprite.js" type="text/javascript"></script> <!-- Sprite Mapping,  -->
+
+
 </head>
 
 <body>
@@ -285,7 +287,7 @@ function handleCollisions() {
   });
 }
 
-
+/*** Parrallax background tutorial http://javacoffee.de/?p=866 **/
 //Parallax background
 
 /** 
@@ -460,7 +462,9 @@ if(currentState === states.splash){
 
  canvas.fillStyle = "#000"; // Set color to black
  canvas.font = '25pt Calibri';
- canvas.fillText("Team Splash Screen", splashTextX, splashTextY);
+ var SPLASH_SCREEN_TEXT = "Team Splash Screen";
+ splashTextX = canvas.measureText(SPLASH_SCREEN_TEXT).width;
+ canvas.fillText(SPLASH_SCREEN_TEXT, (CANVAS_WIDTH/2) - (splashTextX/2) , splashTextY);
 	
 }
 
@@ -469,12 +473,15 @@ if(currentState === states.title){
 
  canvas.fillStyle = "#000"; // Set color to black
  canvas.font = 'bold 40pt Calibri';
-
- canvas.fillText("GAME NAME", CANVAS_WIDTH/3 , CANVAS_HEIGHT/3);
+ var GAME_NAME_TEXT = "GAME NAME";
+ gameTextx = canvas.measureText(GAME_NAME_TEXT).width; //Centers the text based on length
+ canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH/2) - (gameTextx/2)  , CANVAS_HEIGHT/3);
 
  canvas.fillStyle = "#F00"; 
  canvas.font = 'bold 20pt Calibri';
- canvas.fillText("Press Space to Continue", CANVAS_WIDTH/3 , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
+ var SPACEBAR_TEXT = "Press Space to Continue";
+ spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; //Centers the text based on length
+ canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH/2) - (spaceBarTextx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
 
 
 	
@@ -518,17 +525,22 @@ canvas.fillRect(20, 20, player.life, 10);
 
  canvas.fillStyle = "#F00"; // Set color to red
  canvas.font = '25pt Calibri';
- canvas.fillText("Game Over", endTextX, endTextY - 90);
+
+ var GameOVER_TEXT = "Game Over";
+ endTextX = canvas.measureText(GameOVER_TEXT).width; //Centers the text based on length
+ //canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
+
+ canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (endTextX/2), endTextY - 90);
 
 
  canvas.fillStyle = "#000"; // Set color to black
  canvas.font = '20pt Calibri';
- canvas.fillText("First Firstnameson", endTextX, endTextY - 45);
+ canvas.fillText("First Firstnameson", (CANVAS_WIDTH/2) - (endTextX/2), endTextY - 45);
 
 
  canvas.fillStyle = "#000"; // Set color to black
  canvas.font = '20pt Calibri';
- canvas.fillText("Second Secondton", endTextX, endTextY );
+ canvas.fillText("Second Secondton", (CANVAS_WIDTH/2) - (endTextX/2), endTextY );
 
 
 
