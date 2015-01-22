@@ -57,21 +57,23 @@ var currentState = states.splash;
 //Game Loop
 //var FPS = 60;
 function gameloop() {
+    controller();
+    if (paused == false) {
     update();
     draw();
-    if (paused == false) {
-        window.requestAnimationFrame(gameloop);
+   
+        //;
     }
-
+window.requestAnimationFrame(gameloop);
 }
 
 var paused = false;
-if (paused == false) {
-    window.requestAnimationFrame(gameloop);
-}
+
+ window.requestAnimationFrame(gameloop);
+
 
 //Keyboard Map
-$(function() {
+function setUpKeys() {
     window.keydown = {};
 
     function keyName(event) {
@@ -86,17 +88,23 @@ $(function() {
     $(document).bind("keyup", function(event) {
         keydown[keyName(event)] = false;
     });
-});
+};
+setUpKeys();
+
+var notyet = 0;    
+function clearTimer() {
+    notyet = 0;   
+}  
 
 
 function pauseGame() {
-    if (paused == false) {
-        paused = true;
-
-    } else if (paused == true) {
-        paused = false;
-
-    }
+    if (notyet == 1) {
+        console.log("waiting")
+        return; 
+    }  
+     notyet = 1;
+     paused = !paused;
+     setTimeout('clearTimer()', 500);
 }
 
 //console.log(keydown.esc);
@@ -349,15 +357,19 @@ function ParallaxScrolling(canvas, imgdata) {
 var layer = new Array('images/fantasy_space.jpg', 'images/planet.png');
 var parallax = new ParallaxScrolling(canvas, layer);
 
-
-
-function update() { //Updates location and reaction of objects to the canvas
-    //Pause the game
+function controller(){
+     //Pause the game
     if (keydown.p) {
 
         pauseGame();
+        console.log(paused);
 
     }
+
+}
+
+function update() { //Updates location and reaction of objects to the canvas
+
 
 
 
@@ -513,14 +525,14 @@ function draw() { //Draws objects to the canvas
 
 
         //Life Bar top is pink static background
-        canvas.strokeRect(20, 20, 100, 10);
+        canvas.strokeRect(20, 20, 100 * 2, 10);
         canvas.fillStyle = "#8B8989";
-        canvas.fillRect(20, 20, 100, 10);
+        canvas.fillRect(20, 20, 100 * 2, 10);
 
         //Second bar is red dynamic one
-        canvas.strokeRect(20, 20, 100, 10);
+        canvas.strokeRect(20, 20, 100 * 2, 10);
         canvas.fillStyle = "#F00";
-        canvas.fillRect(20, 20, player.life, 10);
+        canvas.fillRect(20, 20, player.life * 2, 10);
 
 
 
