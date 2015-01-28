@@ -43,9 +43,18 @@ var canvas = canvasElement.get(0).getContext("2d");
 canvasElement.appendTo('body');
 
 
+//Mouse Coordinates
+function getMousePos() {
+    //var rect = canvas.getBoundingClientRect();
+    return {
+      x: this.clientX - canvas.offsetLeft,
+      y: this.clientY - canvas.offsetTop
+    };
+}
+//window.addEventListener('mousemove', getMousePos, false);
+canvas.addEventListener('mousemove',getMousePos, false );
+
 // Game State 
-
-
 var states = {
     splash: 0,
     title: 1,
