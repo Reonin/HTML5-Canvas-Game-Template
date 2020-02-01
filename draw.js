@@ -56,7 +56,7 @@ function draw() { //Draws objects to the canvas
         });
 
         //PowerUp Draw
-		powerups.forEach(function(powerup) {
+		    powerups.forEach(function(powerup) {
                     powerup.draw();
         });
         restArea.draw();

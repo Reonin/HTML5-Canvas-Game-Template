@@ -1,4 +1,4 @@
-function Powerup(P) {
+function Powerup(P,xCoor, yCoor) {
     P = P || {};
 
     P.active = true;
@@ -7,8 +7,8 @@ function Powerup(P) {
     P.sprite = Sprite("powerup");
     // P.color = "#A2B";
 
-    P.x = CANVAS_WIDTH / 4 + Math.random() * CANVAS_WIDTH / 2;
-    P.y = 0;
+    P.x = xCoor;
+    P.y = yCoor;
     P.xVelocity = 0
     P.yVelocity = 2;
 
@@ -34,9 +34,9 @@ function Powerup(P) {
 
     P.update = function() {
         P.x += P.xVelocity;
-        P.y += P.yVelocity;
+        // P.y += P.yVelocity;
 
-        P.xVelocity = 3 * Math.sin(P.age * Math.PI / 64);
+        P.xVelocity = 2 * Math.sin(P.age * Math.PI / 64);
 
         P.age++;
 

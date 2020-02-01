@@ -141,9 +141,7 @@ function update() { //Updates location and reaction of objects to the canvas
 						return powerup.active;
 				});
 
-				if (Math.random() < 0.001) {
-						powerups.push(Powerup());
-				}
+				
 
         // playerBullets.forEach(function (bullet) {
         //     bullet.update();
