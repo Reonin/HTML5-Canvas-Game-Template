@@ -305,7 +305,8 @@
                 return this.life;
 
 
-            }
+            },
+            points: 0,
         };
 
 
@@ -647,6 +648,7 @@
 				if (collides(powerup, player)) {
 						powerup.explode();
 						  player.lifeChange(30);
+              player.points += 1;
 				}
 		    });
 
