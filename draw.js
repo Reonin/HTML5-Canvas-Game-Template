@@ -15,7 +15,7 @@ function draw() { //Draws objects to the canvas
 
         canvas.fillStyle = "#000"; // Set color to black
         canvas.font = 'bold 40pt Calibri';
-        var GAME_NAME_TEXT = "GAME NAME";
+        var GAME_NAME_TEXT = "Dream Team : R.E.M Cycle Repair";
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; //Centers the text based on length
         canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) - 3, CANVAS_HEIGHT / 3);
         //The next two create a special text effect
@@ -37,17 +37,17 @@ function draw() { //Draws objects to the canvas
         parallax.Draw(); //draw background
         player.draw();
 
-        tileArray.forEach(function (tile) {
-            tile.draw();
-        });
+        // tileArray.forEach(function (tile) {
+        //     tile.draw();
+        // });
 
-        playerBullets.forEach(function (bullet) {
-            bullet.draw();
-        });
+        // playerBullets.forEach(function (bullet) {
+        //     bullet.draw();
+        // });
 
-        playerMissiles.forEach(function (missle) {
-            missle.draw();
-        });
+        // playerMissiles.forEach(function (missle) {
+        //     missle.draw();
+        // });
 
         //Enemy Draw
         enemies.forEach(function (enemy) {

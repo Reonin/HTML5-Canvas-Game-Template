@@ -71,44 +71,44 @@ function update() { //Updates location and reaction of objects to the canvas
 
         //Player actions
         if (keydown.space) {
-            player.shoot();
+            // player.shoot();
         }
 
 
-        playerBullets.forEach(function (bullet) {
-            bullet.update();
-        });
+        // playerBullets.forEach(function (bullet) {
+        //     bullet.update();
+        // });
 
-        playerBullets = playerBullets.filter(function (bullet) {
-            return bullet.active;
-        });
-
-
-        if (keydown.v) {
-            player.launch();
-        }
-
-        playerMissiles.forEach(function (missle) {
-            missle.update();
-        });
-
-        playerMissiles = playerMissiles.filter(function (missle) {
-            return missle.active;
-        });
+        // playerBullets = playerBullets.filter(function (bullet) {
+        //     return bullet.active;
+        // });
 
 
-        //Enemy Update logic
-        enemies.forEach(function (enemy) {
-            enemy.update();
-        });
+        // if (keydown.v) {
+        //     player.launch();
+        // }
 
-        enemies = enemies.filter(function (enemy) {
-            return enemy.active;
-        });
+        // playerMissiles.forEach(function (missle) {
+        //     missle.update();
+        // });
 
-        if (Math.random() < 0.1) {
-            enemies.push(Enemy());
-        }
+        // playerMissiles = playerMissiles.filter(function (missle) {
+        //     return missle.active;
+        // });
+
+
+        // //Enemy Update logic
+        // enemies.forEach(function (enemy) {
+        //     enemy.update();
+        // });
+
+        // enemies = enemies.filter(function (enemy) {
+        //     return enemy.active;
+        // });
+
+        // if (Math.random() < 0.1) {
+        //     enemies.push(Enemy());
+        // }
 
         //Handle Collision
         handleCollisions();
