@@ -20,8 +20,10 @@
     <script src="libraries/map.js" type="text/javascript"></script> <!-- Object and Level Mapping,  -->
     <script src="libraries/tile.js" type="text/javascript"></script> <!-- Tile Mapping,  -->
 
-    <script src="update.js" type="text/javascript"></script> <!---game engine interaction loop-->
-    <script src="draw.js" type="text/javascript"></script> <!---draws to canvas loop-->
+    <script src="update.js" type="text/javascript"></script>
+    <!---game engine interaction loop-->
+    <script src="draw.js" type="text/javascript"></script>
+    <!---draws to canvas loop-->
 </head>
 
 <body>
@@ -127,11 +129,11 @@
                     String.fromCharCode(event.which).toLowerCase();
             }
 
-            $(document).bind("keydown",  (event) => {
+            $(document).bind("keydown", (event) => {
                 keydown[keyName(event)] = true;
             });
 
-            $(document).bind("keyup",  (event) => {
+            $(document).bind("keyup", (event) => {
                 keydown[keyName(event)] = false;
             });
         };
@@ -181,25 +183,65 @@
             volume: 0.2
         });
 
+        var BACKGROUND_CENTER_X = CANVAS_WIDTH / 2;
+        var BACKGROUND_CENTER_Y = CANVAS_HEIGHT / 2;
         //explosion_sound.play();
 
         //Create The player
+        var INIT_X = BACKGROUND_CENTER_X;
+        var INIT_Y = BACKGROUND_CENTER_Y;
         var player = {
             // color: "#00A",
             sprite: Sprite("spaceship"),
-            x: 220,
-            y: 680,
+            x: INIT_X,
+            y: INIT_Y,
             width: 32,
             height: 32,
             life: 100,
-            velX: 0,
-            velY: 0,
-            speed: 4,
+            velX: 5,
+            velY: 5,
+            angle: 0,
+            speed: 0,
             friction: 0.85,
+            keyboardTurnSpeed: 1,
+            keyboardThrust: 5,
+            i: 0,
+            move: function () {
+                canvas.save();
+                canvas.translate(this.x + (this.width / 2), this.y + (this.height / 2));
+                // Rotate the canvas so the boat draws turned
+                canvas.rotate(this.angle * Math.PI / 180);
+                console.log(this.angle * Math.PI / 180);
+                // Reset the canvas to pre-rotated
+                // Draw the boat
+                this.sprite.draw(canvas, -(this.width / 2), -(this.height / 2));
+                //canvas.rotate(-this.angle);
+                canvas.restore();
+                //canvas.translate(-(this.x + (this.width / 2)), -(this.y + (this.height / 2)));
+            },
+            update: function () {
+                // Keyboard controls for development
+                // Calculate distance to center
+                var dx = BACKGROUND_CENTER_X - this.x;
+                var dy = BACKGROUND_CENTER_Y - this.y;
+                var centerDistance = Math.sqrt((dx * dx) + (dy * dy));
+                var velX = Math.cos((this.angle - 90) * Math.PI / 180) * this.speed;
+                var velY = Math.sin((this.angle - 90) * Math.PI / 180) * this.speed;
+
+                this.x += velX;
+                this.y += velY;
+
+                this.x = this.x.clamp(0 + this.width - 200, CANVAS_WIDTH - this.width); //prevents character from going past canvas
+
+
+                this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
+                this.speed = 0;
+            },
             draw: function () {
                 //canvas.fillStyle = this.color;
                 // canvas.fillRect(this.x, this.y, this.width, this.height);
-                this.sprite.draw(canvas, this.x, this.y);
+                this.move();
+                //this.sprite.draw(canvas, this.x, this.y);
             },
             shoot: function () {
                 var bulletPosition = this.midpoint();
@@ -643,9 +685,9 @@
 
         }
 
-        
 
-       
+
+
     </script>
 </body>
 
