@@ -31,24 +31,25 @@ function update() { //Updates location and reaction of objects to the canvas
 
 
         //Player Movement Controls
-        if (keydown.left && leftTurnOff == false) {
-            if (player.velX > -player.speed) {
+        if (keydown.left) {
+            /*if (player.velX > -player.speed) {
                 player.velX--;
-            }
+            }*/
+            player.angle -= player.keyboardTurnSpeed;
+            console.log("left angle :" + player.angle);
         }
 
-        if (keydown.right  && rightTurnOff == false) {
-            if (player.velX < player.speed) {
-                player.velX++;
-            }
+        if (keydown.right) {
+            player.angle += player.keyboardTurnSpeed;
+            console.log("right angle :" + player.angle);
         }
 
-        if (keydown.up && engineOff == false) {
-            if (player.velY > -player.speed) {
+        if (keydown.up) {
+            /*if (player.velY > -player.speed) {
                 player.velY--;
-            }
-
-
+            }*/// Calculate distance to center
+            player.speed = player.keyboardThrust;
+            
         }
 
         if (keydown.down) {
@@ -57,6 +58,20 @@ function update() { //Updates location and reaction of objects to the canvas
             }
 
         }
+      /*   var dx = BACKGROUND_CENTER_X - player.x;
+            var dy = BACKGROUND_CENTER_Y - player.y;
+            console.log("dx: " + dx);
+            // Calculate angle to center
+            var centerAngle = Math.atan2(dy, dx);
+            var centerVelX = Math.cos(player.angle) * player.speed;
+            var centerVelY = Math.sin(player.angle) * player.speed;
+            console.log("x: " + centerVelX);
+            console.log("y : " + centerVelY);
+            //var velX = Math.cos(player.angle) * player.speed;
+            //var velY = Math.sin(player.angle) * player.speed;
+            player.x += centerVelX;
+            player.y += centerVelY; */
+        /*
 
         if(engineOff == true){
             if(secondEngineFix == true && keydown.shift){
@@ -104,17 +119,18 @@ function update() { //Updates location and reaction of objects to the canvas
         player.x += player.velX;
         player.velY *= player.friction;
         player.y += player.velY;
-
+        */
         player.x = player.x.clamp(0, CANVAS_WIDTH - player.width); //prevents character from going past canvas
 
 
         player.y = player.y.clamp(0, CANVAS_HEIGHT - player.height); //prevents character from going past canvas
-
+       
 
         //Player actions
         if (keydown.space) {
             // player.shoot();
         }
+        player.update();
 
         //Powerup Update logic
 				powerups.forEach(function(powerup){
