@@ -34,9 +34,10 @@ function draw() { //Draws objects to the canvas
     }
 
     if (currentState === states.Game) {
+       
         parallax.Draw(); //draw background
         player.draw();
-
+        writeMessage(canvas, message);
         // tileArray.forEach(function (tile) {
         //     tile.draw();
         // });
@@ -52,6 +53,11 @@ function draw() { //Draws objects to the canvas
         //Enemy Draw
         enemies.forEach(function (enemy) {
             enemy.draw();
+        });
+
+        //PowerUp Draw
+		powerups.forEach(function(powerup) {
+                    powerup.draw();
         });
 
         //Life Bar top is pink static background

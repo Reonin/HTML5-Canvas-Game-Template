@@ -20,10 +20,9 @@
     <script src="libraries/map.js" type="text/javascript"></script> <!-- Object and Level Mapping,  -->
     <script src="libraries/tile.js" type="text/javascript"></script> <!-- Tile Mapping,  -->
 
-    <script src="update.js" type="text/javascript"></script>
-    <!---game engine interaction loop-->
-    <script src="draw.js" type="text/javascript"></script>
-    <!---draws to canvas loop-->
+    <script src="update.js" type="text/javascript"></script> <!---game engine interaction loop-->
+    <script src="draw.js" type="text/javascript"></script> <!---draws to canvas loop-->
+    <script src="libraries/powerup.js" type="text/javascript"></script><!--powerup config -->
 </head>
 
 <body>
@@ -80,10 +79,10 @@
         //Mouse Coordinate Positioning
         function writeMessage(canvas, message) {
             var context = canvasid.getContext('2d');
-            context.clearRect(0, 0, canvasid.width, canvasid.height);
-            context.font = '18pt Calibri';
-            context.fillStyle = 'black';
-            context.fillText(message, 10, 25);
+            //context.clearRect(0, 0, canvasid.width, canvasid.height);
+            context.font = '28pt Calibri';
+            context.fillStyle = 'yellow';
+            context.fillText(message, 20, 75);
             console.log(message);
         }
 
@@ -98,11 +97,11 @@
         var canvasid = document.getElementById('GameCanvasScreen');
         var context = canvas;
 
-        canvasid.addEventListener('mousemove', function (evt) {
-            mousePos = getMousePos(canvasid, evt);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            writeMessage(canvas, message);
-        }, false);
+        // canvasid.addEventListener('mousemove', function (evt) {
+        //     mousePos = getMousePos(canvasid, evt);
+        //     var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        //     writeMessage(canvas, message);
+        // }, false);
 
 
 
@@ -123,7 +122,7 @@
         //Keyboard Map
         function setUpKeys() {
             window.keydown = {};
-
+            window.keyup = {};
             function keyName(event) {
                 return jQuery.hotkeys.specialKeys[event.which] ||
                     String.fromCharCode(event.which).toLowerCase();
@@ -136,6 +135,10 @@
             $(document).bind("keyup", (event) => {
                 keydown[keyName(event)] = false;
             });
+
+            //  $(document).bind("keypress",  (event) => {
+            //     keypress[keyName(event)] = false;
+            //  });
         };
         setUpKeys();
 
@@ -182,10 +185,25 @@
             src: ['sounds/shoot.mp3', 'sounds/shoot.wav'],
             volume: 0.2
         });
+        var pickup_sound = new Howl({
+            src: ['sounds/pickupzing.mp3', 'sounds/pickupzing.wav'],
+            volume: 0.2
+});
 
         var BACKGROUND_CENTER_X = CANVAS_WIDTH / 2;
         var BACKGROUND_CENTER_Y = CANVAS_HEIGHT / 2;
         //explosion_sound.play();
+        let engineOff = false;
+        let leftTurnOff = false;
+        let rightTurnOff = false;
+
+        var firstEngineFix = false;
+        var secondEngineFix = false;
+
+        var leftFirstFix = false;
+        var leftSecondFix = false;
+
+        
 
         //Create The player
         var INIT_X = BACKGROUND_CENTER_X;
@@ -356,7 +374,7 @@
         }
 
         var enemies = [];
-
+        var powerups = [];
         function Enemy(I) {
             I = I || {};
 
@@ -613,6 +631,15 @@
                     player.lifeChange(-10);
                 }
             });
+
+            //PowerUp Collision
+	    	powerups.forEach(function(powerup) {
+				if (collides(powerup, player)) {
+						powerup.explode();
+						  player.lifeChange(30);
+				}
+		});
+            
         }
 
         /*** Parallax background tutorial http://javacoffee.de/?p=866 **/
@@ -684,10 +711,42 @@
             }
 
         }
+        function breakShip(whichPart){
+            if(whichPart == "engine"){
+            engineOff = true;
+            } 
+            if(whichPart == "leftWing"){
+            leftTurnOff = true;
+            } 
+            if(whichPart == "rightWing"){
+            rightTurnOff = true;
+            } 
+        }
+        let isThereAnEventHappening = false;
+        let message = ""
+        function triggerEvent(){
+            var ev = Math.floor(Math.random() * 3);
+            isThereAnEventHappening = true;
+            switch(ev) {
+            case 0:
+                message = "Fix the engine Press 'shift' 2 times"
+                breakShip("engine");
+                break;
 
+            case 1:
+                message = "Saw the log Press 'ctrl' 2 times"
+                breakShip("leftWing");
+                break;
 
+            case 2:
+                message = "It's getting hot in here Use the extinguisher 'alt'"
+                breakShip("rightWing");
+                break
+        }
+    }
 
-
+        
+      // setTimeout( triggerEvent, 3000)
     </script>
 </body>
 

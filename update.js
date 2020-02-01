@@ -72,6 +72,49 @@ function update() { //Updates location and reaction of objects to the canvas
             player.x += centerVelX;
             player.y += centerVelY; */
         /*
+
+        if(engineOff == true){
+            if(secondEngineFix == true && keydown.shift){
+                message = "Engines been fixed Pilot!";
+                engineOff = false;
+                firstEngineFix = false;
+                secondEngineFix = false;
+                setTimeout( triggerEvent, 15000)
+            }
+            if(firstEngineFix == true && keydown.shift == false){
+                secondEngineFix = true;
+            }
+            if(keydown.shift){
+            firstEngineFix = true;
+            }
+        }
+
+        if(leftTurnOff == true){
+            if(leftSecondFix == true && keydown.ctrl){
+                message = "The Left Wing been fixed Pilot!";
+                leftTurnOff = false;
+                leftFirstFix = false;
+                leftSecondFix = false;
+                setTimeout( triggerEvent, 15000)
+            }
+            if(leftFirstFix == true && keydown.ctrl == false){
+                leftSecondFix = false;
+            }
+            if(keydown.ctrl){
+             leftFirstFix = true;
+           
+            }
+        }
+        
+        if(rightTurnOff == true){
+            
+            if(keydown.alt){
+                message = "The Right Wing been fixed Pilot!";
+                rightTurnOff = false;  
+                setTimeout( triggerEvent, 15000)
+               }
+        }
+
         player.velX *= player.friction;
         player.x += player.velX;
         player.velY *= player.friction;
@@ -88,6 +131,19 @@ function update() { //Updates location and reaction of objects to the canvas
             // player.shoot();
         }
         player.update();
+
+        //Powerup Update logic
+				powerups.forEach(function(powerup){
+					powerup.update();
+				});
+
+				powerups = powerups.filter(function(powerup) {
+						return powerup.active;
+				});
+
+				if (Math.random() < 0.001) {
+						powerups.push(Powerup());
+				}
 
         // playerBullets.forEach(function (bullet) {
         //     bullet.update();
