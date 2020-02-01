@@ -31,25 +31,25 @@ function update() { //Updates location and reaction of objects to the canvas
 
 
         //Player Movement Controls
-        if (keydown.left) {
+        if (keydown.left && leftTurnOff == false) {
             /*if (player.velX > -player.speed) {
                 player.velX--;
             }*/
             player.angle -= player.keyboardTurnSpeed;
-            //console.log("left angle :" + player.angle);
+          //  console.log("left angle :" + player.angle);
         }
 
-        if (keydown.right) {
+        if (keydown.right && rightTurnOff == false) {
             player.angle += player.keyboardTurnSpeed;
-            //console.log("right angle :" + player.angle);
+          //  console.log("right angle :" + player.angle);
         }
 
-        if (keydown.up) {
+        if (keydown.up && engineOff == false) {
             /*if (player.velY > -player.speed) {
                 player.velY--;
             }*/// Calculate distance to center
             player.speed = player.keyboardThrust;
-            
+
         }
 
         if (keydown.down) {
@@ -71,7 +71,7 @@ function update() { //Updates location and reaction of objects to the canvas
             //var velY = Math.sin(player.angle) * player.speed;
             player.x += centerVelX;
             player.y += centerVelY; */
-        /*
+
 
         if(engineOff == true){
             if(secondEngineFix == true && keydown.shift){
@@ -90,31 +90,31 @@ function update() { //Updates location and reaction of objects to the canvas
         }
 
         if(leftTurnOff == true){
-            if(leftSecondFix == true && keydown.ctrl){
+            if(leftSecondFix == true && keydown.k){
                 message = "The Left Wing been fixed Pilot!";
                 leftTurnOff = false;
                 leftFirstFix = false;
                 leftSecondFix = false;
                 setTimeout( triggerEvent, 15000)
             }
-            if(leftFirstFix == true && keydown.ctrl == false){
+            if(leftFirstFix == true && keydown.k == false){
                 leftSecondFix = false;
             }
-            if(keydown.ctrl){
+            if(keydown.k){
              leftFirstFix = true;
-           
+
             }
         }
-        
+
         if(rightTurnOff == true){
-            
-            if(keydown.alt){
+
+            if(keydown.j){
                 message = "The Right Wing been fixed Pilot!";
-                rightTurnOff = false;  
+                rightTurnOff = false;
                 setTimeout( triggerEvent, 15000)
                }
         }
-
+/*
         player.velX *= player.friction;
         player.x += player.velX;
         player.velY *= player.friction;
@@ -124,7 +124,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
 
         player.y = player.y.clamp(0, CANVAS_HEIGHT - player.height); //prevents character from going past canvas
-       
+
 
         if(enemies.length < 40){
            // console.log("Length: " + enemies.length)
@@ -180,11 +180,9 @@ function update() { //Updates location and reaction of objects to the canvas
 				powerups = powerups.filter(function(powerup) {
 						return powerup.active;
 				});
-                
-				if (Math.random() < 0.001) {
-						powerups.push(Powerup());
-				}
-        
+
+				
+
         // playerBullets.forEach(function (bullet) {
         //     bullet.update();
         // });

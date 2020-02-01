@@ -25,7 +25,7 @@
     <script src="libraries/powerup.js" type="text/javascript"></script><!--powerup config -->
 </head>
 
-<body>
+<body style="margin:0px;">
     <script>
         //Generate the Canvas
         const CANVAS_WIDTH = 1920;
@@ -52,7 +52,7 @@
         });
         //Draw tile map
         drawMap(canvas);
-        // Game State 
+        // Game State
 
 
         const states = {
@@ -95,7 +95,7 @@
 
         var canvasid = document.getElementById('GameCanvasScreen');
         var context = canvas;
-
+        context.scale(1,1);
         // canvasid.addEventListener('mousemove', function (evt) {
         //     mousePos = getMousePos(canvasid, evt);
         //     var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
@@ -304,7 +304,8 @@
                 return this.life;
 
 
-            }
+            },
+            points: 0,
         };
 
 
@@ -377,6 +378,16 @@
         var enemyShift =0;
         var enemies = [];
         var powerups = [];
+        var restArea = {
+          x : 100,
+          y : CANVAS_HEIGHT - 150,
+          width : 150,
+          height :150,
+          sprite : Sprite("150Square"),
+          draw : function(){
+              this.sprite.draw(canvas, this.x, this.y);
+          }
+        }
         function Enemy(I) {
             I = I || {};
             I.active = true;
@@ -662,15 +673,20 @@
 				if (collides(powerup, player)) {
 						powerup.explode();
 						  player.lifeChange(30);
+              player.points += 1;
 				}
-		});
-            
+		    });
+
+        if(collides(restArea, player)){
+          currentState = states.End;
+        }
+
         }
 
         /*** Parallax background tutorial http://javacoffee.de/?p=866 **/
         //Parallax background
 
-        /** 
+        /**
          * Data structure to hold layer data
          * @param s <string> Absolute path to the image
          * @param x <int> X coordinate
@@ -739,13 +755,13 @@
         function breakShip(whichPart){
             if(whichPart == "engine"){
             engineOff = true;
-            } 
+            }
             if(whichPart == "leftWing"){
             leftTurnOff = true;
-            } 
+            }
             if(whichPart == "rightWing"){
             rightTurnOff = true;
-            } 
+            }
         }
         let isThereAnEventHappening = false;
         let message = ""
@@ -759,19 +775,54 @@
                 break;
 
             case 1:
-                message = "Saw the log Press 'ctrl' 2 times"
+                message = "Saw the log Press 'K' 2 times"
                 breakShip("leftWing");
                 break;
 
             case 2:
-                message = "It's getting hot in here Use the extinguisher 'alt'"
+                message = "It's getting hot in here Use the extinguisher 'J'"
                 breakShip("rightWing");
                 break
         }
     }
 
-        
-    setTimeout( triggerEvent, 3000)
+    	powerups.push(Powerup(0,50,50));
+      powerups.push(Powerup(0,150,150));
+      powerups.push(Powerup(0,250,350));
+      powerups.push(Powerup(0,350,50));
+      powerups.push(Powerup(0,450,150));
+      powerups.push(Powerup(0,650,350));
+
+      powerups.push(Powerup(0,750,50));
+      powerups.push(Powerup(0,850,150));
+      powerups.push(Powerup(0,950,350));
+      powerups.push(Powerup(0,1050,50));
+      powerups.push(Powerup(0,1150,150));
+      powerups.push(Powerup(0,1250,350));
+
+      powerups.push(Powerup(0,1350,50));
+      powerups.push(Powerup(0,1450,150));
+      powerups.push(Powerup(0,1550,350));
+      powerups.push(Powerup(0,1650,50));
+      powerups.push(Powerup(0,1750,150));
+      powerups.push(Powerup(0,1850,350));
+    //   canvas.scale(1,1);
+    //   setInterval(function(){
+    // // //   console.log("updating the canvas");
+    // var previousX = 0;
+    //   console.log(player.x);
+    //
+    //   if( (player.x - previousX) >= 10){
+    //        context.translate(player.x/10, 0);
+    //        //context.translate(-player.x, 0);
+    //        player.x = 0;
+    //        console.log(previousX);
+    //     //   debugger;
+    //   }
+    //
+    //
+    // }, 3000);
+     setTimeout( triggerEvent, 3000)
     </script>
 </body>
 

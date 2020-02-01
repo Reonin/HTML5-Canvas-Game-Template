@@ -34,10 +34,11 @@ function draw() { //Draws objects to the canvas
     }
 
     if (currentState === states.Game) {
-       
+
         parallax.Draw(); //draw background
         player.draw();
         writeMessage(canvas, message);
+
         // tileArray.forEach(function (tile) {
         //     tile.draw();
         // });
@@ -61,10 +62,10 @@ function draw() { //Draws objects to the canvas
         });
 
         //PowerUp Draw
-		powerups.forEach(function(powerup) {
+		    powerups.forEach(function(powerup) {
                     powerup.draw();
         });
-
+        restArea.draw();
         //Life Bar top is pink static background
         canvas.strokeRect(20, 20, 100 * 2, 10);
         canvas.fillStyle = "#8B8989";
@@ -75,7 +76,10 @@ function draw() { //Draws objects to the canvas
         canvas.fillStyle = "#F00";
         canvas.fillRect(20, 20, player.life * 2, 10);
 
-
+        canvas.fillStyle = "yellow";
+        canvas.font = 'bold 30pt Calibri';
+        var SCORE_TEXT = 'Score: ' + player.points;
+        canvas.fillText(SCORE_TEXT, 1600, 50);
     }
 
 
