@@ -31,19 +31,19 @@ function update() { //Updates location and reaction of objects to the canvas
 
 
         //Player Movement Controls
-        if (keydown.left) {
+        if (keydown.left && leftTurnOff == false) {
             if (player.velX > -player.speed) {
                 player.velX--;
             }
         }
 
-        if (keydown.right) {
+        if (keydown.right  && rightTurnOff == false) {
             if (player.velX < player.speed) {
                 player.velX++;
             }
         }
 
-        if (keydown.up) {
+        if (keydown.up && engineOff == false) {
             if (player.velY > -player.speed) {
                 player.velY--;
             }
@@ -56,6 +56,48 @@ function update() { //Updates location and reaction of objects to the canvas
                 player.velY++;
             }
 
+        }
+
+        if(engineOff == true){
+            if(secondEngineFix == true && keydown.shift){
+                message = "Engines been fixed Pilot!";
+                engineOff = false;
+                firstEngineFix = false;
+                secondEngineFix = false;
+                setTimeout( triggerEvent, 15000)
+            }
+            if(firstEngineFix == true && keydown.shift == false){
+                secondEngineFix = true;
+            }
+            if(keydown.shift){
+            firstEngineFix = true;
+            }
+        }
+
+        if(leftTurnOff == true){
+            if(leftSecondFix == true && keydown.ctrl){
+                message = "The Left Wing been fixed Pilot!";
+                leftTurnOff = false;
+                leftFirstFix = false;
+                leftSecondFix = false;
+                setTimeout( triggerEvent, 15000)
+            }
+            if(leftFirstFix == true && keydown.ctrl == false){
+                leftSecondFix = false;
+            }
+            if(keydown.ctrl){
+             leftFirstFix = true;
+           
+            }
+        }
+        
+        if(rightTurnOff == true){
+            
+            if(keydown.alt){
+                message = "The Right Wing been fixed Pilot!";
+                rightTurnOff = false;  
+                setTimeout( triggerEvent, 15000)
+               }
         }
 
         player.velX *= player.friction;

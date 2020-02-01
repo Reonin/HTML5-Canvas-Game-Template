@@ -34,9 +34,10 @@ function draw() { //Draws objects to the canvas
     }
 
     if (currentState === states.Game) {
+       
         parallax.Draw(); //draw background
         player.draw();
-
+        writeMessage(canvas, message);
         // tileArray.forEach(function (tile) {
         //     tile.draw();
         // });
