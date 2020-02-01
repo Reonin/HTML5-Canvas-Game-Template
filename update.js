@@ -36,12 +36,12 @@ function update() { //Updates location and reaction of objects to the canvas
                 player.velX--;
             }*/
             player.angle -= player.keyboardTurnSpeed;
-            console.log("left angle :" + player.angle);
+            //console.log("left angle :" + player.angle);
         }
 
         if (keydown.right) {
             player.angle += player.keyboardTurnSpeed;
-            console.log("right angle :" + player.angle);
+            //console.log("right angle :" + player.angle);
         }
 
         if (keydown.up) {
@@ -126,6 +126,46 @@ function update() { //Updates location and reaction of objects to the canvas
         player.y = player.y.clamp(0, CANVAS_HEIGHT - player.height); //prevents character from going past canvas
        
 
+        if(enemies.length < 40){
+           // console.log("Length: " + enemies.length)
+            var enemy = new Enemy();
+            
+            
+            if(enemies.length < 17)
+                lastEnemyLocY += 80;
+            else if(enemies.length === 17){
+                lastEnemyLocX = 500;
+                lastEnemyLocY = 100;
+                
+            }
+            else if(enemies.length === 23){
+                lastEnemyLocX = 1550;
+                lastEnemyLocY = 0;
+            }
+            if(enemies.length >= 17 && enemies.length < 23){
+                lastEnemyLocX += 90;
+                lastEnemyLocY += 40;
+                enemy.spinning = true;
+            }
+            if(enemies.length >= 23 && enemies.length <40){
+                lastEnemyLocY += 80;
+            }
+
+            enemy.x = lastEnemyLocX;
+            enemy.y = lastEnemyLocY; 
+            enemies.push(enemy);
+
+           // if(enemies.length > 17){
+            //    enemy.rotate();
+           // }
+        
+        }
+            enemies.forEach(function(enemy){
+                enemy.update();
+            });
+            enemies = enemies.filter(function(enemy){
+                return enemy.active;
+            })
         //Player actions
         if (keydown.space) {
             // player.shoot();
@@ -140,11 +180,11 @@ function update() { //Updates location and reaction of objects to the canvas
 				powerups = powerups.filter(function(powerup) {
 						return powerup.active;
 				});
-
+                
 				if (Math.random() < 0.001) {
 						powerups.push(Powerup());
 				}
-
+        
         // playerBullets.forEach(function (bullet) {
         //     bullet.update();
         // });

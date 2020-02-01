@@ -31,7 +31,6 @@
         const CANVAS_WIDTH = 1920;
         const CANVAS_HEIGHT = 1080;
         //HD Resolutions -1280x720 and 1920 × 1080 Full HD
-
         var canvasElement = $("<canvas id ='GameCanvasScreen' width='" + CANVAS_WIDTH + "' height='" + CANVAS_HEIGHT + "'></canvas>");
         const canvas = canvasElement.get(0).getContext("2d");
         canvasElement.appendTo('body');
@@ -83,7 +82,7 @@
             context.font = '28pt Calibri';
             context.fillStyle = 'yellow';
             context.fillText(message, 20, 75);
-            console.log(message);
+            //console.log(message);
         }
 
         function getMousePos(canvas, evt) {
@@ -203,11 +202,11 @@
         var leftFirstFix = false;
         var leftSecondFix = false;
 
-        
+       
 
         //Create The player
-        var INIT_X = BACKGROUND_CENTER_X;
-        var INIT_Y = BACKGROUND_CENTER_Y;
+        var INIT_X = 0;
+        var INIT_Y = 0;
         var player = {
             // color: "#00A",
             sprite: Sprite("spaceship"),
@@ -224,12 +223,12 @@
             keyboardTurnSpeed: 1,
             keyboardThrust: 5,
             i: 0,
-            move: function () {
+            rotate: function () {
                 canvas.save();
                 canvas.translate(this.x + (this.width / 2), this.y + (this.height / 2));
                 // Rotate the canvas so the boat draws turned
                 canvas.rotate(this.angle * Math.PI / 180);
-                console.log(this.angle * Math.PI / 180);
+               // console.log(this.angle * Math.PI / 180);
                 // Reset the canvas to pre-rotated
                 // Draw the boat
                 this.sprite.draw(canvas, -(this.width / 2), -(this.height / 2));
@@ -258,7 +257,7 @@
             draw: function () {
                 //canvas.fillStyle = this.color;
                 // canvas.fillRect(this.x, this.y, this.width, this.height);
-                this.move();
+                this.rotate();
                 //this.sprite.draw(canvas, this.x, this.y);
             },
             shoot: function () {
@@ -373,56 +372,82 @@
             return I;
         }
 
+        var lastEnemyLocX = 300;
+        var lastEnemyLocY = 0;
+        var enemyShift =0;
         var enemies = [];
         var powerups = [];
         function Enemy(I) {
             I = I || {};
-
             I.active = true;
             I.age = Math.floor(Math.random() * 128);
-
+            I.rotateRight = true;
             I.sprite = Sprite("enemy");
             // I.color = "#A2B";
-
-            I.x = CANVAS_WIDTH / 4 + Math.random() * CANVAS_WIDTH / 2;
-            I.y = 0;
+            I.spinning = false;
+            I.x = 100;
+            I.y = 100;
             I.xVelocity = 0
-            I.yVelocity = 2;
-
+            I.yVelocity = 0;
+            I.angle = 0;
             I.width = 32;
             I.height = 32;
 
             I.inBounds = function () {
                 return I.x >= 0 && I.x <= CANVAS_WIDTH &&
-                    I.y >= 0 && I.y <= CANVAS_HEIGHT;
+                I.y >= 0 && I.y <= CANVAS_HEIGHT;
             };
 
             I.draw = function () {
-                //canvas.fillStyle = this.color;
-                //canvas.fillRect(this.x, this.y, this.width, this.height);
-                this.sprite.draw(canvas, this.x, this.y);
+                //canvas.fillStyle = I.color;
+                //canvas.fillRect(I.x, I.y, I.width, I.height);
+                I.sprite.draw(canvas, I.x, I.y);
             };
-
+            I.rotate = function (){
+                I.angle += .3;
+                //var dx = 0 - I.x;
+                //var dy = 1080 - I.y;
+               // var centerDistance = Math.sqrt((dx * dx) + (dy * dy));
+                var velX = Math.cos((I.angle) * Math.PI / 180) * 1;
+                var velY = Math.sin((I.angle) * Math.PI / 180) * 1;
+               // var radius = (1080 - I.y) / (2*Math.PI)
+                //var velX = 0 + Math.cos(I.angle) * radius;
+                //var velY = 1080 + Math.sin(I.angle)* radius;
+               // console.log("Y " + velY)
+                I.x += velX;
+                I.y += velY;
+                canvas.save();
+                canvas.translate(I.x + (CANVAS_WIDTH.width / 2), I.y + (CANVAS_HEIGHT.height / 2));
+                
+                canvas.rotate(I.angle * Math.PI / 180);
+               // console.log(this.angle * Math.PI / 180);
+                // Reset the canvas to pre-rotated
+                // Draw the boat
+                //I.sprite.draw(canvas, -(I.width / 2), -(I.height / 2));
+                //canvas.rotate(-this.angle);
+                canvas.restore();
+            };
             I.explode = function () {
-                this.active = false;
+                I.active = false;
                 explosion_sound.play();
                 // Extra Credit: Add an explosion graphic
             };
 
             I.update = function () {
-                I.x += I.xVelocity;
-                I.y += I.yVelocity;
+                //I.x += I.x;
+                //I.y += I.y;
+                
 
-                I.xVelocity = 3 * Math.sin(I.age * Math.PI / 64);
+                //I.x = I.x.clamp(0 + I.width - 200, CANVAS_WIDTH - I.width); //prevents character from going past canvas
 
-                I.age++;
 
-                I.active = I.active && I.inBounds();
+                //this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
             };
-
+            
             return I;
         };
-
+        //create asteroids
+      
         //Collision Detection
         function collides(a, b) {
             return a.x < b.x + b.width &&
@@ -746,7 +771,7 @@
     }
 
         
-      // setTimeout( triggerEvent, 3000)
+    setTimeout( triggerEvent, 3000)
     </script>
 </body>
 
