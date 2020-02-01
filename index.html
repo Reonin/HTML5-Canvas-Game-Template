@@ -83,7 +83,7 @@
             context.font = '28pt Calibri';
             context.fillStyle = 'yellow';
             context.fillText(message, 20, 75);
-            console.log(message);
+          //  console.log(message);
         }
 
         function getMousePos(canvas, evt) {
@@ -96,7 +96,7 @@
 
         var canvasid = document.getElementById('GameCanvasScreen');
         var context = canvas;
-        context.scale(2,2);
+        context.scale(1,1);
         // canvasid.addEventListener('mousemove', function (evt) {
         //     mousePos = getMousePos(canvasid, evt);
         //     var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
@@ -229,7 +229,7 @@
                 canvas.translate(this.x + (this.width / 2), this.y + (this.height / 2));
                 // Rotate the canvas so the boat draws turned
                 canvas.rotate(this.angle * Math.PI / 180);
-                console.log(this.angle * Math.PI / 180);
+              //  console.log(this.angle * Math.PI / 180);
                 // Reset the canvas to pre-rotated
                 // Draw the boat
                 this.sprite.draw(canvas, -(this.width / 2), -(this.height / 2));
@@ -734,12 +734,12 @@
                 break;
 
             case 1:
-                message = "Saw the log Press 'ctrl' 2 times"
+                message = "Saw the log Press 'K' 2 times"
                 breakShip("leftWing");
                 break;
 
             case 2:
-                message = "It's getting hot in here Use the extinguisher 'alt'"
+                message = "It's getting hot in here Use the extinguisher 'J'"
                 breakShip("rightWing");
                 break
         }
@@ -749,7 +749,7 @@
     // //   console.log("updating the canvas");
     //   context.translate(player.x/CANVAS_WIDTH, 0)
     // }, 2000);
-      // setTimeout( triggerEvent, 3000)
+     setTimeout( triggerEvent, 3000)
     </script>
 </body>
 
