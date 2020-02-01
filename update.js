@@ -131,8 +131,12 @@ function update() { //Updates location and reaction of objects to the canvas
             var enemy = new Enemy();
             
             
-            if(enemies.length < 17)
+            if(enemies.length < 17){
                 lastEnemyLocY += 80;
+                enemy.type = .1;
+                enemy.rotation = 1;
+                enemy.spinning = true;
+            }
             else if(enemies.length === 17){
                 lastEnemyLocX = 500;
                 lastEnemyLocY = 100;

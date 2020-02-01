@@ -393,16 +393,18 @@
             I.active = true;
             I.age = Math.floor(Math.random() * 128);
             I.rotateRight = true;
-            I.sprite = Sprite("enemy");
+            I.sprite = Sprite("alarm_clock");
             // I.color = "#A2B";
             I.spinning = false;
             I.x = 100;
             I.y = 100;
-            I.xVelocity = 0
+            I.xVelocity = 0;
             I.yVelocity = 0;
             I.angle = 0;
-            I.width = 32;
-            I.height = 32;
+            I.width = 57;
+            I.height = 59;
+            I.type = 1;
+            I.rotation = .3;
 
             I.inBounds = function () {
                 return I.x >= 0 && I.x <= CANVAS_WIDTH &&
@@ -415,12 +417,13 @@
                 I.sprite.draw(canvas, I.x, I.y);
             };
             I.rotate = function (){
-                I.angle += .3;
+                I.angle += I.rotation;
                 //var dx = 0 - I.x;
                 //var dy = 1080 - I.y;
                // var centerDistance = Math.sqrt((dx * dx) + (dy * dy));
-                var velX = Math.cos((I.angle) * Math.PI / 180) * 1;
-                var velY = Math.sin((I.angle) * Math.PI / 180) * 1;
+               
+                var velX = Math.cos((I.angle) * Math.PI / 180) * I.type;
+                var velY = Math.sin((I.angle) * Math.PI / 180) * I.type;
                // var radius = (1080 - I.y) / (2*Math.PI)
                 //var velX = 0 + Math.cos(I.angle) * radius;
                 //var velY = 1080 + Math.sin(I.angle)* radius;
