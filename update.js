@@ -116,6 +116,18 @@ function update() { //Updates location and reaction of objects to the canvas
             // player.shoot();
         }
 
+        //Powerup Update logic
+				powerups.forEach(function(powerup){
+					powerup.update();
+				});
+
+				powerups = powerups.filter(function(powerup) {
+						return powerup.active;
+				});
+
+				if (Math.random() < 0.001) {
+						powerups.push(Powerup());
+				}
 
         // playerBullets.forEach(function (bullet) {
         //     bullet.update();
