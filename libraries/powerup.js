@@ -34,10 +34,10 @@ function Powerup(P,xCoor, yCoor) {
 
     P.update = function() {
         P.x += P.xVelocity;
-        // P.y += P.yVelocity;
+        P.y += P.yVelocity;
 
         P.xVelocity = 2 * Math.sin(P.age * Math.PI / 64);
-
+        P.yVelocity = 2 * Math.sin(P.age * Math.PI / 128);
         P.age++;
 
         P.active = P.active && P.inBounds();
