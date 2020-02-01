@@ -25,7 +25,7 @@
     <script src="libraries/powerup.js" type="text/javascript"></script><!--powerup config -->
 </head>
 
-<body>
+<body style="margin:0px;">
     <script>
         //Generate the Canvas
         const CANVAS_WIDTH = 1920;
@@ -53,7 +53,7 @@
         });
         //Draw tile map
         drawMap(canvas);
-        // Game State 
+        // Game State
 
 
         const states = {
@@ -96,7 +96,7 @@
 
         var canvasid = document.getElementById('GameCanvasScreen');
         var context = canvas;
-
+        context.scale(2,2);
         // canvasid.addEventListener('mousemove', function (evt) {
         //     mousePos = getMousePos(canvasid, evt);
         //     var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
@@ -201,14 +201,14 @@
         var leftFirstFix = false;
         var leftSecondFix = false;
 
-        
+
 
         //Create The player
         var player = {
             // color: "#00A",
             sprite: Sprite("spaceship"),
-            x: 220,
-            y: 680,
+            x: 0,
+            y: 0,
             width: 32,
             height: 32,
             life: 100,
@@ -599,13 +599,13 @@
 						  player.lifeChange(30);
 				}
 		});
-            
+
         }
 
         /*** Parallax background tutorial http://javacoffee.de/?p=866 **/
         //Parallax background
 
-        /** 
+        /**
          * Data structure to hold layer data
          * @param s <string> Absolute path to the image
          * @param x <int> X coordinate
@@ -674,13 +674,13 @@
         function breakShip(whichPart){
             if(whichPart == "engine"){
             engineOff = true;
-            } 
+            }
             if(whichPart == "leftWing"){
             leftTurnOff = true;
-            } 
+            }
             if(whichPart == "rightWing"){
             rightTurnOff = true;
-            } 
+            }
         }
         let isThereAnEventHappening = false;
         let message = ""
@@ -705,7 +705,10 @@
         }
     }
 
-        
+    //  setInterval(function(){
+    // //   console.log("updating the canvas");
+    //   context.translate(player.x/CANVAS_WIDTH, 0)
+    // }, 2000);
       // setTimeout( triggerEvent, 3000)
     </script>
 </body>
