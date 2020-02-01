@@ -34,7 +34,7 @@ function draw() { //Draws objects to the canvas
     }
 
     if (currentState === states.Game) {
-       
+
         parallax.Draw(); //draw background
         player.draw();
         writeMessage(canvas, message);
@@ -59,7 +59,7 @@ function draw() { //Draws objects to the canvas
 		powerups.forEach(function(powerup) {
                     powerup.draw();
         });
-
+        restArea.draw();
         //Life Bar top is pink static background
         canvas.strokeRect(20, 20, 100 * 2, 10);
         canvas.fillStyle = "#8B8989";

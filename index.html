@@ -206,8 +206,8 @@
 
 
         //Create The player
-        var INIT_X = BACKGROUND_CENTER_X;
-        var INIT_Y = BACKGROUND_CENTER_Y;
+        var INIT_X = 0;
+        var INIT_Y = 0;
         var player = {
             // color: "#00A",
             sprite: Sprite("spaceship"),
@@ -375,6 +375,16 @@
 
         var enemies = [];
         var powerups = [];
+        var restArea = {
+          x : 100,
+          y : CANVAS_HEIGHT - 150,
+          width : 150,
+          height :150,
+          sprite : Sprite("150Square"),
+          draw : function(){
+              this.sprite.draw(canvas, this.x, this.y);
+          }
+        }
         function Enemy(I) {
             I = I || {};
 
@@ -638,7 +648,11 @@
 						powerup.explode();
 						  player.lifeChange(30);
 				}
-		});
+		    });
+
+        if(collides(restArea, player)){
+          currentState = states.End;
+        }
 
         }
 
@@ -744,11 +758,22 @@
                 break
         }
     }
-
-    //  setInterval(function(){
-    // //   console.log("updating the canvas");
-    //   context.translate(player.x/CANVAS_WIDTH, 0)
-    // }, 2000);
+    //   canvas.scale(1,1);
+    //   setInterval(function(){
+    // // //   console.log("updating the canvas");
+    // var previousX = 0;
+    //   console.log(player.x);
+    //
+    //   if( (player.x - previousX) >= 10){
+    //        context.translate(player.x/10, 0);
+    //        //context.translate(-player.x, 0);
+    //        player.x = 0;
+    //        console.log(previousX);
+    //     //   debugger;
+    //   }
+    //
+    //
+    // }, 3000);
      setTimeout( triggerEvent, 3000)
     </script>
 </body>
