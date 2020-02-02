@@ -21,6 +21,7 @@ function update() { //Updates location and reaction of objects to the canvas
         if (keydown.space) {
 
             currentState = states.Game;
+            canvas.scale(2,2);
         }
 
 
@@ -29,7 +30,65 @@ function update() { //Updates location and reaction of objects to the canvas
 
     if (currentState === states.Game) {
 
+      if(player.x < 960  && player.y < 540 && quadrant.firstRoom == false){
+        if (quadrant.secondRoom == true) {
+            canvas.translate( 960 ,0);
+        }
+        else if(quadrant.thirdRoom){
+            canvas.translate(0,540);
+        }
 
+        for( var key in quadrant ) {
+          quadrant[key] = false;
+        }
+        quadrant.firstRoom = true;
+
+      }
+      else if(player.x > 960 && player.y < 540 && quadrant.secondRoom == false){
+        //debugger;
+        if (quadrant.firstRoom == true) {
+              canvas.translate(-960,0);
+        }
+        else if(quadrant.fourthRoom){
+            canvas.translate(0,540);
+        }
+
+        for( var key in quadrant ) {
+          quadrant[key] = false;
+        }
+        quadrant.secondRoom = true;
+
+      }
+      else if(player.x < 960  && player.y > 540 && quadrant.thirdRoom == false){
+//debugger;
+        if (quadrant.fourthRoom == true) {
+            canvas.translate(960 ,0);
+        }
+        else if(quadrant.firstRoom){
+          canvas.translate(0,-540);
+        }
+        for( var key in quadrant ) {
+          quadrant[key] = false;
+        }
+        quadrant.thirdRoom = true;
+
+
+      }
+      else if(player.x > 960 && player.y > 540 && quadrant.fourthRoom == false){
+      //  debugger;
+        if (quadrant.thirdRoom == true) {
+            canvas.translate(-960 ,0);
+        }
+        else if(quadrant.secondRoom == true){
+          canvas.translate(0,-540);
+        }
+
+        for( var key in quadrant ) {
+          quadrant[key] = false;
+        }
+        quadrant.fourthRoom = true;
+
+      }
         //Player Movement Controls
         if (keydown.left && leftTurnOff == false) {
             /*if (player.velX > -player.speed) {
@@ -98,7 +157,7 @@ function update() { //Updates location and reaction of objects to the canvas
                 setTimeout( triggerEvent, 15000)
             }
             if(leftFirstFix == true && keydown.k == false){
-                leftSecondFix = false;
+                leftSecondFix = true;
             }
             if(keydown.k){
              leftFirstFix = true;
@@ -141,7 +200,7 @@ function update() { //Updates location and reaction of objects to the canvas
 						return powerup.active;
 				});
 
-				
+
 
         // playerBullets.forEach(function (bullet) {
         //     bullet.update();

@@ -203,7 +203,12 @@
         var leftFirstFix = false;
         var leftSecondFix = false;
 
-
+        var quadrant = {
+           firstRoom : true,
+           secondRoom : false,
+           thirdRoom : false,
+           fourthRoom : false
+        };
 
         //Create The player
         var INIT_X = 0;
@@ -781,7 +786,7 @@
       powerups.push(Powerup(0,1650,50));
       powerups.push(Powerup(0,1750,150));
       powerups.push(Powerup(0,1850,350));
-    //   canvas.scale(1,1);
+
     //   setInterval(function(){
     // // //   console.log("updating the canvas");
     // var previousX = 0;
