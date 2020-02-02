@@ -402,24 +402,28 @@ var isMouseDown = false;
               this.sprite.draw(canvas, this.x, this.y);
           }
         }
-        function Enemy(I) {
+        function Enemy(I, locX, locY, spinning, type, rotation, upDown, up) {
             I = I || {};
             I.active = true;
             I.age = Math.floor(Math.random() * 128);
             I.rotateRight = true;
             I.sprite = Sprite("alarm_clock");
             // I.color = "#A2B";
-            I.spinning = false;
-            I.x = 100;
-            I.y = 100;
+            I.spinning = spinning;
+            I.x = locX;
+            I.y = locY;
             I.xVelocity = 0;
             I.yVelocity = 0;
             I.angle = 0;
             I.width = 57;
             I.height = 59;
-            I.type = 1;
-            I.rotation = .3;
-
+            I.type = type;
+            I.rotation = rotation;
+            I.rotateRight = true;
+            I.rotateLeft = false;
+            I.upDown = upDown;
+            I.down = true;
+            I.up = false;
             I.inBounds = function () {
                 return I.x >= 0 && I.x <= CANVAS_WIDTH &&
                 I.y >= 0 && I.y <= CANVAS_HEIGHT;
@@ -431,6 +435,19 @@ var isMouseDown = false;
                 I.sprite.draw(canvas, I.x, I.y);
             };
             I.rotate = function (){
+              /*  if(I.angle < 360 && I.rotateRight === true){
+                    I.angle += I.rotation;
+                }
+                else if(I.angle > 360 && I.rotateRight === false){
+                    I.angle -= I.rotation;
+                }
+
+                if(I.angle === 360 && I.rotateRight === true){
+                    I.rotateRight = false;
+                }
+                else if(I.angle === 0 && I.rotateRight === false){
+                    I.rotateRight = true;
+                }*/
                 I.angle += I.rotation;
                 //var dx = 0 - I.x;
                 //var dy = 1080 - I.y;
@@ -464,6 +481,42 @@ var isMouseDown = false;
             };
 
             I.update = function () {
+                if(upDown === true){
+                //    if(up === false){
+                    if(I.y < locY + 350 && I.down === true){
+                    
+                            I.y += 2;
+                        
+                    }
+                    if(I.y > locY + 350){
+                        I.down = false;
+                    }
+                    if(I.y > locY && I.down === false){
+                        
+                            I.y -= 2;
+                    
+                    }
+                    if(I.y < locY && I.down === false){
+                        I.down =true;
+                    }
+                /* }else{
+                    if(I.y < locY - 100 && I.down === true){
+                        
+                            I.y -= 2;
+                    }
+                    if(I.y > locY - 100){
+                        I.down = false;
+                    }
+                    if(I.y > locY && I.down === false){
+                            I.y += 2;
+                        
+                    }
+                    if(I.y < locY && I.down === false){
+                        I.down =true;
+                    }
+                    }
+                }
+*/
                 //I.x += I.x;
                 //I.y += I.y;
 
@@ -473,7 +526,7 @@ var isMouseDown = false;
 
                 //this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
             };
-
+        };
             return I;
         };
         //create asteroids
@@ -844,6 +897,90 @@ var isMouseDown = false;
       powerups.push(Powerup(0,1650,750));
       powerups.push(Powerup(0,1750,850));
       powerups.push(Powerup(0,1850,950));
+
+      enemies.push(Enemy(0,0,230, true, .1,1));
+      enemies.push(Enemy(0,58,240, true, .1,1));
+      enemies.push(Enemy(0,120,250, true, .1,1));
+      enemies.push(Enemy(0,160,260, true, .1,1));
+      enemies.push(Enemy(0,220,270, true, .1,1));
+      enemies.push(Enemy(0,280,275, true, .1,1));
+      enemies.push(Enemy(0,340,280, true, .1,1));
+      enemies.push(Enemy(0,400,290, true, .1,1));
+      enemies.push(Enemy(0,460,300, true, .1,1));
+      enemies.push(Enemy(0,520,300, true, .1,1));
+      enemies.push(Enemy(0,580,300, true, .1,1));
+      enemies.push(Enemy(0,640,305, true, .1,1));
+      enemies.push(Enemy(0,700,50, true, .3,1, true));
+      enemies.push(Enemy(0,760,90, true, .5,2.5, true));
+      enemies.push(Enemy(0,820,150, true, .5,2, true));
+      enemies.push(Enemy(0,880,50, true, .5,2,true));
+      enemies.push(Enemy(0,940,75, true, .5,3, true));
+      enemies.push(Enemy(0,1000,50, true, .5,2,true));
+      enemies.push(Enemy(0,1060,300, true, .1,1));
+      enemies.push(Enemy(0,1120,290, true, .1,1));
+      enemies.push(Enemy(0,1180,280, true, .1,1));
+      enemies.push(Enemy(0,1240,270, true, .1,1));
+      enemies.push(Enemy(0,1280,260, true, .1,1));
+      enemies.push(Enemy(0,1340,200, true, .1,1));
+      enemies.push(Enemy(0,1400,180, true, .1,1));
+      enemies.push(Enemy(0,1460,200, true, .1,1));
+      enemies.push(Enemy(0,1500,230, true, .1,1));
+      enemies.push(Enemy(0,1560,250, true, .1,1));
+      enemies.push(Enemy(0,1620,280, true, .1,1));
+      enemies.push(Enemy(0,1635,340, true, .1,1));
+      enemies.push(Enemy(0,1645,400, true, .1,1));
+      enemies.push(Enemy(0,1640,440, true, .1,1));
+      enemies.push(Enemy(0,1625,500, true, .1,1));
+      enemies.push(Enemy(0,1610,550, true, .1,1));
+      enemies.push(Enemy(0,1560,850, true, .1,1));
+      enemies.push(Enemy(0,1500,800, true, .1,1));
+      enemies.push(Enemy(0,1600,900, true, .1,1));
+      enemies.push(Enemy(0,1660,950, true, .1,1));
+      enemies.push(Enemy(0,1720,990, true, .1,1));
+      enemies.push(Enemy(0,1460,785, true, .1,1));
+      enemies.push(Enemy(0,1400,760, true, .1,1));
+      enemies.push(Enemy(0,1340,720, true, .1,1));
+      enemies.push(Enemy(0,1280,700, true, .1,1));
+      enemies.push(Enemy(0,1240,665, true, .1,1));
+      enemies.push(Enemy(0,1180,670, true, .1,1));
+      enemies.push(Enemy(0,1120,675, true, .1,1));
+      
+      enemies.push(Enemy(0,1060,670, true, .1,1));
+      enemies.push(Enemy(0,1000,675, true, .1,1));
+      enemies.push(Enemy(0,940,350, true, .1,1,true));
+      enemies.push(Enemy(0,880,355, true, .1,1,true));
+      enemies.push(Enemy(0,820,355, true, .1,1,true ));
+      enemies.push(Enemy(0,640,675, true, .1,1));
+
+      enemies.push(Enemy(0,940,675, true, .1,1));
+      enemies.push(Enemy(0,880,675, true, .1,1));
+      enemies.push(Enemy(0,820,675, true, .1,1));
+      enemies.push(Enemy(0,760,675, true, .1,1));
+      enemies.push(Enemy(0,700,660, true, .1,1));
+      enemies.push(Enemy(0,640,665, true, .1,1));
+      enemies.push(Enemy(0,580,670, true, .1,1));
+      enemies.push(Enemy(0,520,650, true, .1,1));
+      enemies.push(Enemy(0,460,640, true, .1,1));
+      enemies.push(Enemy(0,400,630, true, .1,1));
+      enemies.push(Enemy(0,340,620, true, .1,1));
+      enemies.push(Enemy(0,280,615, true, .1,1));
+      enemies.push(Enemy(0,0,700, true, .1,1));
+      enemies.push(Enemy(0,60,740, true, .1,1));
+      enemies.push(Enemy(0,120,760, true, .1,1));
+      enemies.push(Enemy(0,180,780, true, .1,1));
+      enemies.push(Enemy(0,240,790, true, .1,1));
+      enemies.push(Enemy(0,300,800, true, .1,1));
+      enemies.push(Enemy(0,360,825, true, .1,1));
+      enemies.push(Enemy(0,420,835, true, .1,1));
+      enemies.push(Enemy(0,480,845, true, .1,1));
+      enemies.push(Enemy(0,540,850, true, .1,1));
+      enemies.push(Enemy(0,600,860, true, .1,1));
+      enemies.push(Enemy(0,660,865, true, .1,1));
+      enemies.push(Enemy(0,720,870, true, .1,1));
+      enemies.push(Enemy(0,780,875, true, .1,1));
+      enemies.push(Enemy(0,840,885, true, .1,1));
+      enemies.push(Enemy(0,900,890, true, .1,1));
+      enemies.push(Enemy(0,960,900, true, .1,1));
 
     //   setInterval(function(){
     // // //   console.log("updating the canvas");
