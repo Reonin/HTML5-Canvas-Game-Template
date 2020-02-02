@@ -133,33 +133,33 @@ function update() { //Updates location and reaction of objects to the canvas
 
 
         if(engineOff == true){
-            if(secondEngineFix == true && keydown.shift){
+            if(secondEngineFix == true && keydown.down){
                 message = "Engines been fixed Pilot!";
                 engineOff = false;
                 firstEngineFix = false;
                 secondEngineFix = false;
                 setTimeout( triggerEvent, 15000)
             }
-            if(firstEngineFix == true && keydown.shift == false){
+            if(firstEngineFix == true && keydown.down == false){
                 secondEngineFix = true;
             }
-            if(keydown.shift){
+            if(keydown.down){
             firstEngineFix = true;
             }
         }
 
         if(leftTurnOff == true){
-            if(leftSecondFix == true && keydown.k){
+            if(leftSecondFix == true && keydown.space){
                 message = "The Left Wing been fixed Pilot!";
                 leftTurnOff = false;
                 leftFirstFix = false;
                 leftSecondFix = false;
                 setTimeout( triggerEvent, 15000)
             }
-            if(leftFirstFix == true && keydown.k == false){
+            if(leftFirstFix == true && keydown.space == false){
                 leftSecondFix = true;
             }
-            if(keydown.k){
+            if(keydown.space){
              leftFirstFix = true;
 
             }
@@ -167,7 +167,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
         if(rightTurnOff == true){
 
-            if(keydown.j){
+            if(isMouseDown){
                 message = "The Right Wing been fixed Pilot!";
                 rightTurnOff = false;
                 setTimeout( triggerEvent, 15000)

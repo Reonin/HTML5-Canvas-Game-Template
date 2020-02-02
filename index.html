@@ -101,8 +101,13 @@
         //     var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
         //     writeMessage(canvas, message);
         // }, false);
-
-
+var isMouseDown = false;
+  $('body').mouseup(function() {
+   isMouseDown = false;
+ })
+ .mousedown(function() {
+   isMouseDown = true;
+ });
 
         function gameloop() {
             controller();
@@ -426,7 +431,7 @@
                 //var dx = 0 - I.x;
                 //var dy = 1080 - I.y;
                // var centerDistance = Math.sqrt((dx * dx) + (dy * dy));
-               
+
                 var velX = Math.cos((I.angle) * Math.PI / 180) * I.type;
                 var velY = Math.sin((I.angle) * Math.PI / 180) * I.type;
                // var radius = (1080 - I.y) / (2*Math.PI)
@@ -778,17 +783,17 @@
             isThereAnEventHappening = true;
             switch(ev) {
             case 0:
-                message = "Fix the engine Press 'shift' 2 times"
+                message = "Fix the engine Press 'Down Arrow/ HAMMER DOWN' 2 times"
                 breakShip("engine");
                 break;
 
             case 1:
-                message = "Saw the log Press 'K' 2 times"
+                message = "Saw the log Press 'Space/Saw' 2 times"
                 breakShip("leftWing");
                 break;
 
             case 2:
-                message = "It's getting hot in here Use the extinguisher 'J'"
+                message = "Use the extinguisher 'Click' Once"
                 breakShip("rightWing");
                 break
         }
