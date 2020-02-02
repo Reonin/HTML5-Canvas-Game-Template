@@ -19,7 +19,7 @@ function update() { //Updates location and reaction of objects to the canvas
     if (currentState === states.title) {
 
         if (keydown.space) {
-
+          GameLoopMusic_sound.play();
             currentState = states.Game;
             canvas.scale(2,2);
         }
@@ -37,6 +37,8 @@ function update() { //Updates location and reaction of objects to the canvas
         else if(quadrant.thirdRoom){
             canvas.translate(0,540);
         }
+        messageX = 0;
+        messageY = 0;
 
         for( var key in quadrant ) {
           quadrant[key] = false;
@@ -53,6 +55,9 @@ function update() { //Updates location and reaction of objects to the canvas
             canvas.translate(0,540);
         }
 
+        messageX = 960;
+        messageY = 0;
+
         for( var key in quadrant ) {
           quadrant[key] = false;
         }
@@ -67,6 +72,10 @@ function update() { //Updates location and reaction of objects to the canvas
         else if(quadrant.firstRoom){
           canvas.translate(0,-540);
         }
+
+        messageX = 0;
+        messageY = 540;
+
         for( var key in quadrant ) {
           quadrant[key] = false;
         }
@@ -82,6 +91,9 @@ function update() { //Updates location and reaction of objects to the canvas
         else if(quadrant.secondRoom == true){
           canvas.translate(0,-540);
         }
+
+        messageX = 960;
+        messageY = 540;
 
         for( var key in quadrant ) {
           quadrant[key] = false;

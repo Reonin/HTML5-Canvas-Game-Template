@@ -50,7 +50,7 @@ function draw() { //Draws objects to the canvas
         // playerMissiles.forEach(function (missle) {
         //     missle.draw();
         // });
-        
+
         //Enemy Draw
         enemies.forEach(function (enemy) {
             if(enemy.active===true){
@@ -77,9 +77,9 @@ function draw() { //Draws objects to the canvas
         canvas.fillRect(20, 20, player.life * 2, 10);
 
         canvas.fillStyle = "yellow";
-        canvas.font = 'bold 30pt Calibri';
+        canvas.font = 'bold 20pt Calibri';
         var SCORE_TEXT = 'Score: ' + player.points;
-        canvas.fillText(SCORE_TEXT, 1600, 50);
+        canvas.fillText(SCORE_TEXT, 800 + messageX, 50 + messageY);
     }
 
 

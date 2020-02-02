@@ -75,13 +75,15 @@
                     window.setTimeout(callback, 1000 / 60);
                 };
         })();
+        var messageX = 0;
+        var messageY = 0;
         //Mouse Coordinate Positioning
         function writeMessage(canvas, message) {
             var context = canvasid.getContext('2d');
             //context.clearRect(0, 0, canvasid.width, canvasid.height);
-            context.font = '28pt Calibri';
+            context.font = '20pt Calibri';
             context.fillStyle = 'yellow';
-            context.fillText(message, 20, 75);
+            context.fillText(message, 20 + messageX, 75 + messageY);
             //console.log(message);
         }
 
@@ -178,8 +180,9 @@ var isMouseDown = false;
 
         //Sound creation
         var GameLoopMusic_sound = new Howl({
-            src: ['sounds/In-Orbit.mp3'],
+            src: ['sounds/ambient_space.wav'],
             autoplay: false,
+            volume:0.3,
             loop: true,
         });
         var explosion_sound = new Howl({
