@@ -69,6 +69,7 @@ function draw() { //Draws objects to the canvas
 
         parallax.Draw(); //draw background
         player.draw();
+        drawrail();
         writeMessage(canvas, message);
 
         // tileArray.forEach(function (tile) {
@@ -110,8 +111,15 @@ function draw() { //Draws objects to the canvas
 
         canvas.fillStyle = "yellow";
         canvas.font = 'bold 20pt Calibri';
-        var SCORE_TEXT = 'Score: ' + player.points;
+        var SCORE_TEXT = 'ZZZ x: ' + player.points;
         canvas.fillText(SCORE_TEXT, 800 + messageX, 50 + messageY);
+        
+
+        if(endFlag == false){
+            endZoomOutFactor = endZoomOutFactor - 0.00001;   
+            canvas.scale(endZoomOutFactor,endZoomOutFactor);
+        }
+       
     }
 
   else if (currentState === states.End) {
