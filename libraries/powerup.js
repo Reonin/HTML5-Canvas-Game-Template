@@ -4,7 +4,7 @@ function Powerup(P,xCoor, yCoor) {
     P.active = true;
     P.age = Math.floor(Math.random() * 128);
 
-    P.sprite = Sprite("powerup");
+    P.sprite = Sprite("zzzs");
     // P.color = "#A2B";
 
     P.x = xCoor;

@@ -11,7 +11,7 @@ function draw() { //Draws objects to the canvas
         canvas.fillText(SPLASH_SCREEN_TEXT, (CANVAS_WIDTH / 2) - (splashTextX / 2), splashTextY);
     }
 
-    if (currentState === states.title) {
+    else if (currentState === states.title) {
 
         canvas.fillStyle = "#000"; // Set color to black
         canvas.font = 'bold 40pt Calibri';
@@ -31,9 +31,12 @@ function draw() { //Draws objects to the canvas
         spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; //Centers the text based on length
         canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
 
+        canvas.drawImage(titleImg1, (CANVAS_WIDTH / 2) - 100, (CANVAS_HEIGHT / 2));
+        canvas.drawImage(titleImg2, (CANVAS_WIDTH / 2) + 100, (CANVAS_HEIGHT / 2));
+
     }
 
-    if (currentState === states.Game) {
+  else if (currentState === states.Game) {
 
         parallax.Draw(); //draw background
         player.draw();
@@ -82,9 +85,7 @@ function draw() { //Draws objects to the canvas
         canvas.fillText(SCORE_TEXT, 800 + messageX, 50 + messageY);
     }
 
-
-
-    if (currentState === states.End) {
+  else if (currentState === states.End) {
 
 
         canvas.fillStyle = "#F00"; // Set color to red
@@ -99,13 +100,13 @@ function draw() { //Draws objects to the canvas
 
         canvas.fillStyle = "#000"; // Set color to black
         canvas.font = '20pt Calibri';
-        endTextX = canvas.measureText("First Firstnameson").width;
-        canvas.fillText("First Firstnameson", (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY - 45);
+        endTextX = canvas.measureText("Blake Balick-Shreiber").width;
+        canvas.fillText("Blake Balick-Shreiber", (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY - 45);
 
 
         canvas.fillStyle = "#000"; // Set color to black
         canvas.font = '20pt Calibri';
-        canvas.fillText("Second Secondton", (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY);
+        canvas.fillText("Corey Jeffers", (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY);
 
 
 
