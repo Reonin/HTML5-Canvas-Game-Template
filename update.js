@@ -123,6 +123,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
         if (keydown.d && rightTurnOff == false) {
             player.angle += player.keyboardTurnSpeed;
+            
           //  console.log("right angle :" + player.angle);
         }
 
@@ -132,6 +133,14 @@ function update() { //Updates location and reaction of objects to the canvas
             }*/// Calculate distance to center
             player.speed = player.keyboardThrust;
 
+        }
+        if(leftTurnOff === true){
+            player.angle += .3;
+            player.speed += 1;
+        }
+        if(rightTurnOff === true){
+            player.angle -= .3;
+            player.speed += 1;
         }
 
         if (keydown.s) {
@@ -210,7 +219,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
         player.y = player.y.clamp(0, CANVAS_HEIGHT - player.height); //prevents character from going past canvas
 
-
+/*
         if(enemies.length < 40){
            // console.log("Length: " + enemies.length)
             var enemy = new Enemy();
@@ -248,7 +257,7 @@ function update() { //Updates location and reaction of objects to the canvas
             //    enemy.rotate();
            // }
 
-        }
+        }*/
             enemies.forEach(function(enemy){
                 enemy.update();
             });
