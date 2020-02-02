@@ -32,9 +32,11 @@
         const CANVAS_HEIGHT = 1080;
         //HD Resolutions -1280x720 and 1920 × 1080 Full HD
         var canvasElement = $("<canvas id ='GameCanvasScreen' width='" + CANVAS_WIDTH + "' height='" + CANVAS_HEIGHT + "'></canvas>");
+        //var fadeToBlackElement = $("<div id='overlay' width='" + CANVAS_WIDTH + "' height='" + CANVAS_HEIGHT + "></div>");
         const canvas = canvasElement.get(0).getContext("2d");
         canvasElement.appendTo('body');
-
+        //fadeToBlackElement.append(canvasElement);
+        var timer = '2m';
         /**By Ryan Giglio*/
         function scaleToSmallest() {
             var ratio = CANVAS_WIDTH / CANVAS_HEIGHT;
@@ -221,6 +223,10 @@ var isMouseDown = false;
 
         var online_sound = new Howl({
             src: ['sounds/Bluezone_BC0235_synth_texture_002.wav'],
+            volume: 0.4
+        });
+        var snoring_sound = new Howl({
+            src: ['sounds/JM BURP Long Airy.wav'],
             volume: 0.4
         });
 

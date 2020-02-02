@@ -111,8 +111,8 @@ function draw() { //Draws objects to the canvas
 
         canvas.fillStyle = "yellow";
         canvas.font = 'bold 20pt Calibri';
-        var SCORE_TEXT = 'ZZZ x: ' + player.points;
-        canvas.fillText(SCORE_TEXT, 800 + messageX, 50 + messageY);
+        var SCORE_TEXT = 'ZZZ x: ' + timer;
+        canvas.fillText(SCORE_TEXT, 750 + messageX, 50 + messageY);
         
 
         if(endFlag == false){

@@ -30,10 +30,36 @@ function update() { //Updates location and reaction of objects to the canvas
    else if (currentState === states.instruct) {
 
         if (isMouseDown) {
+        var countDownDate = new Date(new Date().getTime() + 1*6000);
           GameLoopMusic_sound.play();
             currentState = states.Game;
             canvas.scale(2,2);
             setTimeout( triggerEvent, 3000);
+            var x = setInterval(function() {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+                  
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+                //console.log(distance)
+                // Time calculations for days, hours, minutes and seconds
+                
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                  
+                // Output the result in an element with id="demo"
+                timer = minutes + "m " + seconds + "s ";
+                  
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                  clearInterval(x);
+                  // = "EXPIRED";
+                  snoring_sound.play();
+                  currentState = states.End;
+            
+                }
+              }, 1000);
         }
 
 
@@ -328,7 +354,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
     if (currentState === states.End) {
 
-
+        canvas.scale(0.5,0.5);
         endTextY = endTextY + 1;
 
         if (endTextY >= 300) {
