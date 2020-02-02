@@ -159,6 +159,7 @@ function update() { //Updates location and reaction of objects to the canvas
             if(secondEngineFix == true && keydown.down){
                 message = "Engines back online!";
                 engineOff = false;
+                online_sound.play();
                 firstEngineFix = false;
                 secondEngineFix = false;
                 setTimeout( triggerEvent, 10000)
@@ -174,6 +175,7 @@ function update() { //Updates location and reaction of objects to the canvas
         if(leftTurnOff == true){
             if(leftSecondFix == true && keydown.space){
                 message = "Left turn repaired!";
+                online_sound.play();
                 leftTurnOff = false;
                 leftFirstFix = false;
                 leftSecondFix = false;
@@ -193,6 +195,7 @@ function update() { //Updates location and reaction of objects to the canvas
             if(isMouseDown){
                 message = "Right turn repaired!";
                 rightTurnOff = false;
+                online_sound.play();
                 setTimeout( triggerEvent, 10000)
                }
         }
