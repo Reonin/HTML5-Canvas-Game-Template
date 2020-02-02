@@ -185,17 +185,17 @@ var isMouseDown = false;
         var GameLoopMusic_sound = new Howl({
             src: ['sounds/ambient_space.wav'],
             autoplay: false,
-            volume:0.3,
+            volume: 0.3,
             loop: true,
         });
         var explosion_sound = new Howl({
             src: ['sounds/alarm_beep.wav'],
-            volume:0.3,
+            volume: 0.3,
         });
 
         var pickup_sound = new Howl({
-            src: ['sounds/retro_collect_pickup_coin_03'],
-            volume: 1.0
+            src: ['sounds/retro_collect_pickup_coin_03.wav'],
+            volume: 0.4
         });
 
         var BACKGROUND_CENTER_X = CANVAS_WIDTH / 2;
@@ -231,7 +231,7 @@ var isMouseDown = false;
             life: 100,
             velX: 5,
             velY: 5,
-            angle: 0,
+            angle: 90,
             speed: 0,
             friction: 0.85,
             keyboardTurnSpeed: 1,
@@ -393,7 +393,7 @@ var isMouseDown = false;
         var enemies = [];
         var powerups = [];
         var restArea = {
-          x : 100,
+          x : 10,
           y : CANVAS_HEIGHT - 150,
           width : 150,
           height :150,
@@ -436,7 +436,7 @@ var isMouseDown = false;
                 //var dy = 1080 - I.y;
                // var centerDistance = Math.sqrt((dx * dx) + (dy * dy));
 
-                var velX = Math.cos((I.angle) * Math.PI / 180) * I.type;
+                var velX = Math.cos((Math.random() * I.angle) * Math.PI / 180) * I.type;
                 var velY = Math.sin((I.angle) * Math.PI / 180) * I.type;
                // var radius = (1080 - I.y) / (2*Math.PI)
                 //var velX = 0 + Math.cos(I.angle) * radius;
