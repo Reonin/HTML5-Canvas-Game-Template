@@ -90,7 +90,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
       }
         //Player Movement Controls
-        if (keydown.left && leftTurnOff == false) {
+        if (keydown.a && leftTurnOff == false) {
             /*if (player.velX > -player.speed) {
                 player.velX--;
             }*/
@@ -98,12 +98,12 @@ function update() { //Updates location and reaction of objects to the canvas
           //  console.log("left angle :" + player.angle);
         }
 
-        if (keydown.right && rightTurnOff == false) {
+        if (keydown.d && rightTurnOff == false) {
             player.angle += player.keyboardTurnSpeed;
           //  console.log("right angle :" + player.angle);
         }
 
-        if (keydown.up && engineOff == false) {
+        if (keydown.w && engineOff == false) {
             /*if (player.velY > -player.speed) {
                 player.velY--;
             }*/// Calculate distance to center
@@ -111,7 +111,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
         }
 
-        if (keydown.down) {
+        if (keydown.s) {
             if (player.velY < player.speed) {
                 player.velY++;
             }
@@ -188,8 +188,8 @@ function update() { //Updates location and reaction of objects to the canvas
         if(enemies.length < 40){
            // console.log("Length: " + enemies.length)
             var enemy = new Enemy();
-            
-            
+
+
             if(enemies.length < 17){
                 lastEnemyLocY += 80;
                 enemy.type = .1;
@@ -199,7 +199,7 @@ function update() { //Updates location and reaction of objects to the canvas
             else if(enemies.length === 17){
                 lastEnemyLocX = 500;
                 lastEnemyLocY = 100;
-                
+
             }
             else if(enemies.length === 23){
                 lastEnemyLocX = 1550;
@@ -215,13 +215,13 @@ function update() { //Updates location and reaction of objects to the canvas
             }
 
             enemy.x = lastEnemyLocX;
-            enemy.y = lastEnemyLocY; 
+            enemy.y = lastEnemyLocY;
             enemies.push(enemy);
 
            // if(enemies.length > 17){
             //    enemy.rotate();
            // }
-        
+
         }
             enemies.forEach(function(enemy){
                 enemy.update();
