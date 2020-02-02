@@ -59,7 +59,8 @@
             splash: 0,
             title: 1,
             Game: 2,
-            End: 3
+            End: 3,
+            instruct: 4
         };
         let currentState = states.title;
 
@@ -86,6 +87,26 @@
             context.fillText(message, 20 + messageX, 75 + messageY);
             //console.log(message);
         }
+
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
 
         function getMousePos(canvas, evt) {
             var rect = canvasid.getBoundingClientRect();
@@ -794,17 +815,17 @@ var isMouseDown = false;
             savedY = player.y;
             switch(ev) {
             case 0:
-                message = "Engine Down! Hit the Hay 'Down Arrow/ HAMMER DOWN' 2 times"
+                message = "Engine Down! Hit the Hay 'Down Arrow/ HAMMER DOWN' x2"
                 breakShip("engine");
                 break;
 
             case 1:
-                message = "Saw the log Press 'Space/Saw' 2 times"
+                message = "Saw the log Press 'Space/Saw' x2"
                 breakShip("leftWing");
                 break;
 
             case 2:
-                message = "Fire! Time for lights out 'Click' Once"
+                message = "Fire! Time for lights out 'Click' x1"
                 breakShip("rightWing");
                 break
         }
@@ -860,7 +881,7 @@ var isMouseDown = false;
     //
     //
     // }, 3000);
-     setTimeout( triggerEvent, 3000)
+     
     </script>
 </body>
 
