@@ -50,10 +50,15 @@ function draw() { //Draws objects to the canvas
         // playerMissiles.forEach(function (missle) {
         //     missle.draw();
         // });
-
+        
         //Enemy Draw
         enemies.forEach(function (enemy) {
-            enemy.draw();
+            if(enemy.active===true){
+                enemy.draw();
+                if(enemy.spinning === true){
+                    enemy.rotate();
+                }
+            }
         });
 
         //PowerUp Draw
