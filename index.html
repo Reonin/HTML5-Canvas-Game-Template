@@ -202,7 +202,12 @@
         var leftFirstFix = false;
         var leftSecondFix = false;
 
-       
+        var quadrant = {
+           firstRoom : true,
+           secondRoom : false,
+           thirdRoom : false,
+           fourthRoom : false
+        };
 
         //Create The player
         var INIT_X = 0;
@@ -432,7 +437,7 @@
                 I.y += velY;
                 canvas.save();
                 canvas.translate(I.x + (CANVAS_WIDTH.width / 2), I.y + (CANVAS_HEIGHT.height / 2));
-                
+
                 canvas.rotate(I.angle * Math.PI / 180);
                // console.log(this.angle * Math.PI / 180);
                 // Reset the canvas to pre-rotated
@@ -450,18 +455,18 @@
             I.update = function () {
                 //I.x += I.x;
                 //I.y += I.y;
-                
+
 
                 //I.x = I.x.clamp(0 + I.width - 200, CANVAS_WIDTH - I.width); //prevents character from going past canvas
 
 
                 //this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height);
             };
-            
+
             return I;
         };
         //create asteroids
-      
+
         //Collision Detection
         function collides(a, b) {
             return a.x < b.x + b.width &&
@@ -809,7 +814,7 @@
       powerups.push(Powerup(0,1650,50));
       powerups.push(Powerup(0,1750,150));
       powerups.push(Powerup(0,1850,350));
-    //   canvas.scale(1,1);
+
     //   setInterval(function(){
     // // //   console.log("updating the canvas");
     // var previousX = 0;
