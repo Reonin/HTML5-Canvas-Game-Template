@@ -456,7 +456,9 @@ var isMouseDown = false;
                 canvas.restore();
             };
             I.explode = function () {
-                I.active = false;
+                I.active = true;
+                player.x = savedX;
+                player.y = savedY;
                 explosion_sound.play();
                 // Extra Credit: Add an explosion graphic
             };
@@ -781,10 +783,15 @@ var isMouseDown = false;
             }
         }
         let isThereAnEventHappening = false;
-        let message = ""
+        let message = "";
+        let savedX = 0;
+        let savedY = 0;
         function triggerEvent(){
             var ev = Math.floor(Math.random() * 3);
             isThereAnEventHappening = true;
+
+            savedX = player.x;
+            savedY = player.y;
             switch(ev) {
             case 0:
                 message = "Engine Down! Hit the Hay 'Down Arrow/ HAMMER DOWN' 2 times"
@@ -817,12 +824,26 @@ var isMouseDown = false;
       powerups.push(Powerup(0,1150,150));
       powerups.push(Powerup(0,1250,350));
 
+      powerups.push(Powerup(0,750,450));
+      powerups.push(Powerup(0,850,550));
+      powerups.push(Powerup(0,950,650));
+      powerups.push(Powerup(0,1050,750));
+      powerups.push(Powerup(0,1150,850));
+      powerups.push(Powerup(0,1250,950));
+
       powerups.push(Powerup(0,1350,50));
       powerups.push(Powerup(0,1450,150));
       powerups.push(Powerup(0,1550,350));
       powerups.push(Powerup(0,1650,50));
       powerups.push(Powerup(0,1750,150));
       powerups.push(Powerup(0,1850,350));
+
+      powerups.push(Powerup(0,1350,450));
+      powerups.push(Powerup(0,1450,550));
+      powerups.push(Powerup(0,1550,650));
+      powerups.push(Powerup(0,1650,750));
+      powerups.push(Powerup(0,1750,850));
+      powerups.push(Powerup(0,1850,950));
 
     //   setInterval(function(){
     // // //   console.log("updating the canvas");
