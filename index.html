@@ -59,7 +59,8 @@
             splash: 0,
             title: 1,
             Game: 2,
-            End: 3
+            End: 3,
+            instruct: 4
         };
         let currentState = states.title;
 
@@ -86,6 +87,26 @@
             context.fillText(message, 20 + messageX, 75 + messageY);
             //console.log(message);
         }
+
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
 
         function getMousePos(canvas, evt) {
             var rect = canvasid.getBoundingClientRect();
@@ -180,7 +201,7 @@ var isMouseDown = false;
         var splashTextY = 0;
         var endTextX = CANVAS_WIDTH / 3;
         var endTextY = 0;
-
+        var endZoomOutFactor = 1;
         //Sound creation
         var GameLoopMusic_sound = new Howl({
             src: ['sounds/ambient_space.wav'],
@@ -217,7 +238,7 @@ var isMouseDown = false;
            thirdRoom : false,
            fourthRoom : false
         };
-
+        var endFlag = true;
         //Create The player
         var INIT_X = 0;
         var INIT_Y = 0;
@@ -301,8 +322,8 @@ var isMouseDown = false;
             },
             explode: function () {
                 this.active = false;
-                explosion_sound.play();
-                GameLoopMusic_sound.fadeOut(0, 2000);
+                //explosion_sound.play();
+                GameLoopMusic_sound.fade(1,0, 2000);
                 currentState = states.End;
                 // An explosion sound and then end the game
             },
@@ -322,7 +343,23 @@ var isMouseDown = false;
             points: 0,
         };
 
-
+        railArray = [0,0];
+        
+        function drawrail(){
+    
+            canvas.beginPath();
+            canvas.moveTo(0,0);
+            for (let index = 0; index < railArray.length; index= index+2) {
+                //const element = array[index];
+                canvas.lineTo(railArray[index],railArray[index+1]);
+                  
+            }
+            
+            //canvas.lineTo(200, 160);
+            canvas.lineWidth = 2;
+            canvas.strokeStyle = 'pink';
+            canvas.stroke();
+        }
         var playerBullets = [];
 
         function Bullet(I) {
@@ -746,11 +783,20 @@ var isMouseDown = false;
 						powerup.explode();
 						  player.lifeChange(30);
               player.points += 1;
+              railArray.push(player.x,player.y);
 				}
 		    });
 
         if(collides(restArea, player)){
-          currentState = states.End;
+            if (endFlag == true){
+                setTimeout(function(){
+                currentState = states.End;
+                 }, 3000);
+                 endFlag = false;
+            }
+           
+
+          
         }
 
         }
@@ -847,17 +893,17 @@ var isMouseDown = false;
             savedY = player.y;
             switch(ev) {
             case 0:
-                message = "Engine Down! Hit the Hay 'Down Arrow/ HAMMER DOWN' 2 times"
+                message = "Engine Down! Hit the Hay 'Down Arrow/ HAMMER DOWN' x2"
                 breakShip("engine");
                 break;
 
             case 1:
-                message = "Saw the log Press 'Space/Saw' 2 times"
+                message = "Saw the log Press 'Space/Saw' x2"
                 breakShip("leftWing");
                 break;
 
             case 2:
-                message = "Fire! Time for lights out 'Click' Once"
+                message = "Fire! Time for lights out 'Click' x1"
                 breakShip("rightWing");
                 break
         }
@@ -997,7 +1043,7 @@ var isMouseDown = false;
     //
     //
     // }, 3000);
-     setTimeout( triggerEvent, 3000)
+     
     </script>
 </body>
 

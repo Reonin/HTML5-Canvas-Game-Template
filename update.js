@@ -19,16 +19,27 @@ function update() { //Updates location and reaction of objects to the canvas
     if (currentState === states.title) {
 
         if (keydown.space) {
-          GameLoopMusic_sound.play();
-            currentState = states.Game;
-            canvas.scale(2,2);
+          
+            currentState = states.instruct;
+          
         }
 
 
     }
 
+   else if (currentState === states.instruct) {
 
-    if (currentState === states.Game) {
+        if (isMouseDown) {
+          GameLoopMusic_sound.play();
+            currentState = states.Game;
+            canvas.scale(2,2);
+            setTimeout( triggerEvent, 3000);
+        }
+
+
+    }
+
+    else if (currentState === states.Game) {
 
       if(player.x < 960  && player.y < 540 && quadrant.firstRoom == false){
         if (quadrant.secondRoom == true) {
@@ -155,7 +166,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
         if(engineOff == true){
             if(secondEngineFix == true && keydown.down){
-                message = "Engines been fixed Pilot!";
+                message = "Engines back online!";
                 engineOff = false;
                 firstEngineFix = false;
                 secondEngineFix = false;
@@ -171,7 +182,7 @@ function update() { //Updates location and reaction of objects to the canvas
 
         if(leftTurnOff == true){
             if(leftSecondFix == true && keydown.space){
-                message = "The Left Wing been fixed Pilot!";
+                message = "Left turn repaired!";
                 leftTurnOff = false;
                 leftFirstFix = false;
                 leftSecondFix = false;
@@ -189,7 +200,7 @@ function update() { //Updates location and reaction of objects to the canvas
         if(rightTurnOff == true){
 
             if(isMouseDown){
-                message = "The Right Wing been fixed Pilot!";
+                message = "Right turn repaired!";
                 rightTurnOff = false;
                 setTimeout( triggerEvent, 10000)
                }
