@@ -44,10 +44,10 @@ function update() { // Updates location and reaction of objects to the canvas
     player.x += player.velX;
     player.velY *= player.friction;
     player.y += player.velY;
-
-    player.x = player.x.clamp(0, CANVAS_WIDTH - player.width); // prevents character from going past canvas
-
-    player.y = player.y.clamp(0, CANVAS_HEIGHT - player.height); // prevents character from going past canvas
+    // prevents character from going past canvas
+    player.x = player.x.clamp(0, CANVAS_WIDTH - player.width);
+    // prevents character from going past canvas
+    player.y = player.y.clamp(0, CANVAS_HEIGHT - player.height);
 
     // Player actions
     if (keydown.space) {
